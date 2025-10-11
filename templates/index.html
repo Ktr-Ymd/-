@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>特許公報リーダー</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>特許公報リーダー</h1>
+        <p>
+          PDF形式の特許公報を読み込み、内容を分割して検索できるようにします。<br />
+          表示される情報はアップロードした公報のテキストのみです。
+        </p>
+      </header>
+
+      <section class="upload">
+        <h2>特許公報をアップロード</h2>
+        <form action="/" method="post" enctype="multipart/form-data">
+          <label for="pdf">PDFファイル</label>
+          <input id="pdf" name="pdf" type="file" accept="application/pdf" required />
+          <button type="submit">読み込む</button>
+        </form>
+      </section>
+
+      {% if document %}
+      <section class="document-info">
+        <h2>現在のドキュメント</h2>
+        <dl>
+          <div>
+            <dt>ファイル名</dt>
+            <dd>{{ document.name }}</dd>
+          </div>
+          <div>
+            <dt>ページ数</dt>
+            <dd>{{ document.page_count }}</dd>
+          </div>
+          <div>
+            <dt>分割数</dt>
+            <dd>{{ document.chunks | length }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="search">
+        <h2>公報内検索</h2>
+        <form action="/" method="get">
+          <label for="query">検索キーワード</label>
+          <input id="query" name="query" type="text" value="{{ query }}" />
+          <button type="submit">検索</button>
+        </form>
+
+        {% if query %}
+        <h3>検索結果</h3>
+        {% if results %}
+        <ol class="results">
+          {% for idx, score in results %}
+          <li>
+            <article>
+              <header>
+                <h4>該当セクション {{ idx + 1 }}</h4>
+                <p class="score">類似度: {{ '%.3f' | format(score) }}</p>
+              </header>
+              <p class="snippet">{{ document.chunks[idx] }}</p>
+            </article>
+          </li>
+          {% endfor %}
+        </ol>
+        {% else %}
+        <p>該当するセクションが見つかりませんでした。</p>
+        {% endif %}
+        {% endif %}
+      </section>
+
+      <section class="full-text">
+        <h2>公報全文</h2>
+        <ol>
+          {% for chunk in document.chunks %}
+          <li><p>{{ chunk }}</p></li>
+          {% endfor %}
+        </ol>
+      </section>
+      {% endif %}
+    </main>
+  </body>
+</html>
