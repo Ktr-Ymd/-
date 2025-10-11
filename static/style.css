@@ -1,0 +1,122 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f6f6f6;
+  color: #222;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+header h1 {
+  margin-bottom: 0.4rem;
+}
+
+section {
+  margin-top: 2rem;
+}
+
+.upload form,
+.search form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+label {
+  font-weight: 600;
+}
+
+input[type="file"],
+input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  background: #2b6cb0;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #245b94;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+dl div {
+  display: contents;
+}
+
+.results {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.results article {
+  background: #f2f7ff;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #d6e3ff;
+}
+
+.results .score {
+  font-size: 0.9rem;
+  color: #3b4b6b;
+}
+
+.full-text ol {
+  padding-left: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.full-text li {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 0.8rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  main {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .upload form,
+  .search form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    width: 100%;
+  }
+}
