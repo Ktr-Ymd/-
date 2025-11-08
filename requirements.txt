@@ -1,0 +1,2 @@
+# This project relies only on the Python standard library.
+# The file is provided for compatibility with tooling that expects requirements.txt.
